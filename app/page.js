@@ -1,10 +1,26 @@
 
+import {
+  Bell,
+  Camera,
+  Clock,
+  Droplets,
+  Fish,
+  LayoutDashboard,
+  Leaf,
+  Settings,
+  Thermometer,
+  TrendingUp,
+  TriangleAlert,
+  UserRound,
+} from "lucide-react";
+
+
 const navigation = [
-  { icon: "▦", label: "Dashboard", href: "/" },
-  { icon: "≋", label: "Water Monitoring", href: "/water" },
-  { icon: "🐟", label: "Fish Monitoring", href: "/fish" },
-  { icon: "⚠", label: "Alerts & Treatment", href: "/treatment" },
-  { icon: "◷", label: "Feeding & Controls", href: "/feeding" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: Droplets, label: "Water Monitoring", href: "/water" },
+  { icon: Fish, label: "Fish Monitoring", href: "/fish" },
+  { icon: TriangleAlert, label: "Alerts & Treatment", href: "/treatment" },
+  { icon: Clock, label: "Feeding & Controls", href: "/feeding" },
 ];
 
 function SectionTitle({ title, subtitle, action }) {
@@ -28,7 +44,7 @@ function SectionTitle({ title, subtitle, action }) {
   );
 }
 
-function MetricCard({ icon, label, value, unit, description, accent }) {
+function MetricCard({ icon: Icon, label, value, unit, description, accent }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
@@ -48,7 +64,7 @@ function MetricCard({ icon, label, value, unit, description, accent }) {
         <div
           className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-xl ${accent}`}
         >
-          {icon}
+          <Icon size={22} aria-hidden="true" />
         </div>
       </div>
       <div className="mt-4 flex items-center gap-2 border-t border-slate-100 pt-3">
@@ -59,11 +75,11 @@ function MetricCard({ icon, label, value, unit, description, accent }) {
   );
 }
 
-function EmptyState({ icon, title, description }) {
+function EmptyState({ icon: Icon, title, description }) {
   return (
     <div className="flex min-h-48 flex-col items-center justify-center px-5 py-8 text-center">
       <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-teal-50 text-2xl">
-        {icon}
+        <Icon size={26} aria-hidden="true" />
       </div>
       <h3 className="text-sm font-semibold text-slate-700">{title}</h3>
       <p className="mt-2 max-w-xs text-sm leading-6 text-slate-500">
@@ -82,7 +98,7 @@ export default function Dashboard() {
           <div className="border-b border-white/10 px-6 py-7">
             <div className="flex items-center gap-3">
               <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-400/15 text-2xl">
-                🐟
+                <Fish size={22} aria-hidden="true" />
               </div>
               <div>
                 <h1 className="text-sm font-bold tracking-wide">
@@ -108,10 +124,9 @@ export default function Dashboard() {
                     item.active
                       ? "bg-teal-500 font-semibold text-white shadow-lg shadow-black/10"
                       : "text-teal-50/75 hover:bg-white/10 hover:text-white"
-                  }`}
-                >
+                  }`}>
                   <span className="flex w-6 items-center justify-center text-lg">
-                    {item.icon}
+                    <item.icon size={18} aria-hidden="true" />
                   </span>
                   {item.label}
                 </a>
@@ -122,7 +137,7 @@ export default function Dashboard() {
           <div className="mt-auto p-5">
             <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
               <div className="mb-3 flex h-9 w-9 items-center justify-center rounded-xl bg-teal-400/15 text-lg">
-                ♧
+                <Leaf size={20} aria-hidden="true" />
               </div>
               <p className="text-sm font-semibold">Healthy pond, healthy fish</p>
               <p className="mt-2 text-xs leading-5 text-teal-100/65">
@@ -141,7 +156,7 @@ export default function Dashboard() {
           <header className="sticky top-0 z-10 flex min-h-[76px] items-center justify-between gap-4 border-b border-slate-200 bg-white/95 px-5 backdrop-blur sm:px-8 lg:px-10">
             <div className="flex items-center gap-3">
               <div className="hidden h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-xl text-teal-800 max-md:flex">
-                🐟
+                <Fish size={20} aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-800">
@@ -164,7 +179,7 @@ export default function Dashboard() {
                 </p>
               </div>
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-teal-100 text-lg">
-                👤
+                <UserRound size={20} aria-hidden="true" />
               </div>
             </div>
           </header>
@@ -197,7 +212,7 @@ export default function Dashboard() {
             {/* Metric cards */}
             <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
               <MetricCard
-                icon="🌡️"
+                icon={Thermometer}
                 label="Water Temperature"
                 value="--"
                 unit="°C"
@@ -205,14 +220,14 @@ export default function Dashboard() {
                 accent="bg-orange-50"
               />
               <MetricCard
-                icon="💧"
+                icon={Droplets}
                 label="Water pH Level"
                 value="--"
                 description="Awaiting sensor data"
                 accent="bg-sky-50"
               />
               <MetricCard
-                icon="🐟"
+                icon={Fish}
                 label="Fish Monitoring"
                 value="Pending"
                 description="Camera not connected"
@@ -234,11 +249,11 @@ export default function Dashboard() {
                   />
                   <div className="flex flex-wrap gap-4 text-xs text-slate-500">
                     <span className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-teal-600" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-yellow-200" />
                       Temperature
                     </span>
                     <span className="flex items-center gap-2">
-                      <span className="h-2.5 w-2.5 rounded-full bg-sky-500" />
+                      <span className="h-2.5 w-2.5 rounded-full bg-green-400" />
                       pH Level
                     </span>
                   </div>
@@ -256,7 +271,7 @@ export default function Dashboard() {
                     </div>
                     <div className="relative mx-5 max-w-xs text-center">
                       <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white text-xl shadow-sm">
-                        ↗
+                        <TrendingUp size={22} aria-hidden="true" />
                       </div>
                       <p className="text-sm font-semibold text-slate-700">
                         No readings available yet
@@ -289,7 +304,7 @@ export default function Dashboard() {
                     <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full border border-white/5" />
                     <div className="absolute -bottom-14 -left-8 h-44 w-44 rounded-full border border-white/5" />
                     <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-3xl">
-                      📷
+                      <Camera size={28} aria-hidden="true" />
                     </div>
                     <p className="relative text-sm font-semibold text-white">
                       Camera feed unavailable
@@ -338,7 +353,7 @@ export default function Dashboard() {
                   />
                 </div>
                 <EmptyState
-                  icon="🔔"
+                  icon={Bell}
                   title="No alerts to display"
                   description="Water-quality warnings and fish-condition alerts will appear here when monitoring is operational."
                 />
@@ -356,17 +371,17 @@ export default function Dashboard() {
                 <div className="divide-y divide-slate-100 px-5 sm:px-6">
                   {[
                     {
-                      icon: "🌡️",
+                      icon: Thermometer,
                       name: "Water Sensors",
                       detail: "Temperature and pH",
                     },
                     {
-                      icon: "📷",
+                      icon: Camera,
                       name: "Pond Camera",
                       detail: "Visual fish monitoring",
                     },
                     {
-                      icon: "⚙️",
+                      icon: Settings,
                       name: "Control Equipment",
                       detail: "Feeder and other actuators",
                     },
@@ -377,7 +392,7 @@ export default function Dashboard() {
                     >
                       <div className="flex min-w-0 items-center gap-3">
                         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">
-                          {device.icon}
+                          <device.icon size={20} aria-hidden="true" />
                         </div>
                         <div className="min-w-0">
                           <p className="text-sm font-semibold text-slate-700">
@@ -416,7 +431,7 @@ export default function Dashboard() {
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                 <div className="flex items-start gap-4 rounded-xl border border-slate-100 p-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-orange-50 text-xl">
-                    🐠
+                    <Fish size={22} aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-700">
@@ -434,7 +449,7 @@ export default function Dashboard() {
 
                 <div className="flex items-start gap-4 rounded-xl border border-slate-100 p-4">
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-sky-50 text-xl">
-                    💧
+                    <Droplets size={22} aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-700">

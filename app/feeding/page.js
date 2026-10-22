@@ -1,10 +1,21 @@
 
+import {
+  CalendarDays,
+  Clock,
+  Fish,
+  Info,
+  LayoutDashboard,
+  Settings,
+  TriangleAlert,
+  Waves,
+} from "lucide-react";
+
 const navigation = [
-  { icon: "▦", label: "Dashboard", href: "/", active: false },
-  { icon: "≋", label: "Water Monitoring", href: "/water", active: false },
-  { icon: "🐟", label: "Fish Monitoring", href: "/fish", active: false },
-  { icon: "⚠", label: "Alerts & Treatment", href: "/treatment", active: false },
-  { icon: "◷", label: "Feeding & Controls", href: "/feeding", active: true },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/", active: false },
+  { icon: Waves, label: "Water Monitoring", href: "/water", active: false },
+  { icon: Fish, label: "Fish Monitoring", href: "/fish", active: false },
+  { icon: TriangleAlert, label: "Alerts & Treatment", href: "/treatment", active: false },
+  { icon: Clock, label: "Feeding & Controls", href: "/feeding", active: true },
 ];
 
 function Sidebar() {
@@ -13,7 +24,7 @@ function Sidebar() {
       <div className="border-b border-white/10 px-5 py-7">
         <a href="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-400/15 text-2xl">
-            🐟
+            <Fish size={22} aria-hidden="true" />
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-wide">SMART AQUA</h1>
@@ -41,7 +52,7 @@ function Sidebar() {
               }`}
             >
               <span className="flex w-6 items-center justify-center text-lg">
-                {item.icon}
+                <item.icon size={18} aria-hidden="true" />
               </span>
               {item.label}
             </a>
@@ -95,7 +106,7 @@ function StatusPill({ children, color = "gray" }) {
   );
 }
 
-function SummaryCard({ title, value, description, icon }) {
+function SummaryCard({ title, value, description, icon: Icon }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="flex items-start justify-between gap-3">
@@ -107,7 +118,7 @@ function SummaryCard({ title, value, description, icon }) {
           </p>
         </div>
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-xl">
-          {icon}
+          <Icon size={20} aria-hidden="true" />
         </div>
       </div>
     </div>
@@ -115,11 +126,13 @@ function SummaryCard({ title, value, description, icon }) {
 }
 
 function DetailRow({ title, description, status }) {
+  const Icon = title === "Automatic Feeding" ? Clock : Settings;
+
   return (
     <div className="flex flex-col gap-3 border-b border-slate-100 py-4 last:border-0 sm:flex-row sm:items-start sm:justify-between">
       <div className="flex items-start gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">
-          {title === "Automatic Feeding" ? "🕒" : "⚙️"}
+          <Icon size={20} aria-hidden="true" />
         </div>
         <div>
           <p className="text-sm font-semibold text-slate-700">{title}</p>
@@ -137,7 +150,7 @@ function SchedulePlaceholder() {
   return (
     <tr>
       <td colSpan={3} className="px-4 py-10 text-center">
-        <div className="text-3xl">🗓️</div>
+        <CalendarDays className="mx-auto" size={32} aria-hidden="true" />
         <p className="mt-3 text-sm font-semibold text-slate-700">
           No feeding schedule configured
         </p>
@@ -161,7 +174,7 @@ export default function FeedingPage() {
           <header className="flex min-h-[76px] items-center justify-between gap-4 border-b border-slate-200 bg-white px-5 sm:px-8">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-xl md:hidden">
-                🐟
+                <Fish size={20} aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-800">
@@ -205,7 +218,7 @@ export default function FeedingPage() {
             <div className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-xl">
-                  ℹ️
+                  <Info size={20} aria-hidden="true" />
                 </div>
                 <div>
                   <h2 className="text-sm font-bold text-amber-900">
@@ -232,21 +245,21 @@ export default function FeedingPage() {
                   title="Feeder Status"
                   value="Not configured"
                   description="Awaiting hardware connection"
-                  icon="⚙️"
+                  icon={Settings}
                 />
 
                 <SummaryCard
                   title="Next Feeding"
                   value="--"
                   description="No schedule available"
-                  icon="🕒"
+                  icon={Clock}
                 />
 
                 <SummaryCard
                   title="Today's Feedings"
                   value="--"
                   description="Awaiting feeding records"
-                  icon="🐟"
+                  icon={Fish}
                 />
               </div>
             </section>
@@ -294,7 +307,7 @@ export default function FeedingPage() {
 
               <div className="mb-5 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-6 text-center">
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-xl bg-teal-50 text-2xl">
-                  ⚙️
+                  <Settings size={24} aria-hidden="true" />
                 </div>
 
                 <h3 className="mt-4 text-sm font-bold text-slate-700">

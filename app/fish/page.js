@@ -1,10 +1,24 @@
 
+import {
+  Brain,
+  Camera,
+  Clock,
+  Fish,
+  Info,
+  LayoutDashboard,
+  Microscope,
+  Palette,
+  Search,
+  TriangleAlert,
+  Waves,
+} from "lucide-react";
+
 const navigation = [
-  { icon: "▦", label: "Dashboard", href: "/", active: false },
-  { icon: "≋", label: "Water Monitoring", href: "/water", active: false },
-  { icon: "🐟", label: "Fish Monitoring", href: "/fish", active: true },
-  { icon: "⚠", label: "Alerts & Treatment", href: "/treatment", active: false },
-  { icon: "◷", label: "Feeding & Controls", href: "/feeding", active: false },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/", active: false },
+  { icon: Waves, label: "Water Monitoring", href: "/water", active: false },
+  { icon: Fish, label: "Fish Monitoring", href: "/fish", active: true },
+  { icon: TriangleAlert, label: "Alerts & Treatment", href: "/treatment", active: false },
+  { icon: Clock, label: "Feeding & Controls", href: "/feeding", active: false },
 ];
 
 function Sidebar() {
@@ -13,7 +27,7 @@ function Sidebar() {
       <div className="border-b border-white/10 px-5 py-7">
         <a href="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-400/15 text-2xl">
-            🐟
+            <Fish size={22} aria-hidden="true" />
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-wide">SMART AQUA</h1>
@@ -41,7 +55,7 @@ function Sidebar() {
               }`}
             >
               <span className="flex w-6 items-center justify-center text-lg">
-                {item.icon}
+                <item.icon size={18} aria-hidden="true" />
               </span>
               {item.label}
             </a>
@@ -94,11 +108,11 @@ function StatusPill({ children, color = "gray" }) {
   );
 }
 
-function InformationCard({ icon, title, description }) {
+function InformationCard({ icon: Icon, title, description }) {
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
       <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-xl bg-teal-50 text-xl">
-        {icon}
+        <Icon size={22} aria-hidden="true" />
       </div>
       <h3 className="text-sm font-bold text-slate-800">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-slate-500">{description}</p>
@@ -120,7 +134,7 @@ export default function FishMonitoringPage() {
           <header className="flex min-h-[76px] items-center justify-between gap-4 border-b border-slate-200 bg-white px-5 sm:px-8">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-xl md:hidden">
-                🐟
+                <Fish size={20} aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-800">
@@ -163,7 +177,7 @@ export default function FishMonitoringPage() {
             {/* Camera connection notice */}
             <div className="mb-8 flex flex-col gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
               <div className="flex items-start gap-3">
-                <span className="text-xl">ⓘ</span>
+                <Info size={20} aria-hidden="true" />
                 <div>
                   <p className="text-sm font-semibold text-amber-900">
                     Camera feed is not available
@@ -190,7 +204,7 @@ export default function FishMonitoringPage() {
                 <div className="absolute right-1/4 top-1/3 h-32 w-32 rounded-full border border-white/5" />
 
                 <div className="relative mb-4 flex h-16 w-16 items-center justify-center rounded-2xl border border-white/10 bg-white/10 text-3xl">
-                  📷
+                  <Camera size={28} aria-hidden="true" />
                 </div>
 
                 <h3 className="relative text-base font-semibold text-white">
@@ -239,13 +253,13 @@ export default function FishMonitoringPage() {
 
               <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
                 <InformationCard
-                  icon="🐠"
+                  icon={Fish}
                   title="Fish Variety"
                   description="The identified fish variety and any available recognition results will appear here after image analysis is implemented."
                 />
 
                 <InformationCard
-                  icon="🔎"
+                  icon={Search}
                   title="Identification Results"
                   description="The interface can display the model's prediction and confidence information when the selected recognition library supports them."
                 />
@@ -261,19 +275,19 @@ export default function FishMonitoringPage() {
 
               <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
                 <InformationCard
-                  icon="🏊"
+                  icon={Waves}
                   title="Behavior Changes"
                   description="Observe unusual swimming, movement, or behavior compared with expected patterns."
                 />
 
                 <InformationCard
-                  icon="🎨"
+                  icon={Palette}
                   title="Body Color Changes"
                   description="Examine visible changes in coloration that may warrant further assessment."
                 />
 
                 <InformationCard
-                  icon="🔬"
+                  icon={Microscope}
                   title="Physical Appearance"
                   description="Flag visible changes in physical appearance for closer observation."
                 />
@@ -282,7 +296,7 @@ export default function FishMonitoringPage() {
               <div className="mt-5 rounded-2xl border border-sky-100 bg-sky-50 p-5">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-xl">
-                    🧠
+                    <Brain size={22} aria-hidden="true" />
                   </div>
                   <div>
                     <h3 className="text-sm font-bold text-sky-900">

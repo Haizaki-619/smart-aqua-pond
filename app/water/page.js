@@ -1,13 +1,28 @@
 
 "use client";
 
+import {
+  Clock,
+  Droplets,
+  Fish,
+  FlaskConical,
+  Info,
+  LayoutDashboard,
+  Leaf,
+  Microscope,
+  Search,
+  Thermometer,
+  TriangleAlert,
+  TrendingUp,
+  Waves,
+} from "lucide-react";
 import { useState } from "react";
 
 const initialParameters = [
   {
     name: "Water Temperature",
     key: "temperature",
-    symbol: "🌡️",
+    icon: Thermometer,
     unit: "°C",
     description: "Water temperature",
     color: "bg-orange-50",
@@ -16,7 +31,7 @@ const initialParameters = [
   {
     name: "pH Level",
     key: "ph",
-    symbol: "💧",
+    icon: Droplets,
     unit: "pH",
     description: "Acidity or alkalinity",
     color: "bg-sky-50",
@@ -25,7 +40,7 @@ const initialParameters = [
   {
     name: "Ammonia",
     key: "ammonia",
-    symbol: "🧪",
+    icon: FlaskConical,
     unit: "mg/L",
     description: "Ammonia concentration",
     color: "bg-purple-50",
@@ -34,29 +49,20 @@ const initialParameters = [
   {
     name: "Nitrite",
     key: "nitrite",
-    symbol: "🔬",
+    icon: Microscope,
     unit: "mg/L",
     description: "Nitrite concentration",
     color: "bg-pink-50",
     iconColor: "text-pink-700",
   },
-  {
-    name: "Nitrate",
-    key: "nitrate",
-    symbol: "🌿",
-    unit: "mg/L",
-    description: "Nitrate concentration",
-    color: "bg-emerald-50",
-    iconColor: "text-emerald-700",
-  },
 ];
 
 const navigation = [
-  { icon: "▦", label: "Dashboard", href: "/" },
-  { icon: "≋", label: "Water Monitoring", href: "/water", active: true },
-  { icon: "🐟", label: "Fish Monitoring", href: "/fish" },
-  { icon: "⚠", label: "Alerts & Treatment", href: "/treatment" },
-  { icon: "◷", label: "Feeding & Controls", href: "/feeding" },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/" },
+  { icon: Waves, label: "Water Monitoring", href: "/water", active: true },
+  { icon: Fish, label: "Fish Monitoring", href: "/fish" },
+  { icon: TriangleAlert, label: "Alerts & Treatment", href: "/treatment" },
+  { icon: Clock, label: "Feeding & Controls", href: "/feeding" },
 ];
 
 function Sidebar() {
@@ -65,7 +71,7 @@ function Sidebar() {
       <div className="border-b border-white/10 px-5 py-7">
         <a href="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-400/15 text-2xl">
-            🐟
+            <Fish size={22} aria-hidden="true" />
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-wide">SMART AQUA</h1>
@@ -92,7 +98,7 @@ function Sidebar() {
               }`}
             >
               <span className="flex w-6 items-center justify-center text-lg">
-                {item.icon}
+                <item.icon size={18} aria-hidden="true" />
               </span>
               {item.label}
             </a>
@@ -116,6 +122,8 @@ function Sidebar() {
 }
 
 function ParameterCard({ parameter }) {
+  const Icon = parameter.icon;
+
   return (
     <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
@@ -133,7 +141,7 @@ function ParameterCard({ parameter }) {
         <div
           className={`flex h-11 w-11 items-center justify-center rounded-xl text-xl ${parameter.color} ${parameter.iconColor}`}
         >
-          {parameter.symbol}
+          <Icon size={22} aria-hidden="true" />
         </div>
       </div>
 
@@ -167,7 +175,7 @@ export default function WaterQualityPage() {
           <header className="flex min-h-[76px] items-center justify-between gap-4 border-b border-slate-200 bg-white px-5 sm:px-8">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-xl md:hidden">
-                💧
+                <Droplets size={20} aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-800">
@@ -209,7 +217,7 @@ export default function WaterQualityPage() {
             {/* Connection notice */}
             <div className="mb-8 flex flex-col gap-3 rounded-2xl border border-amber-200 bg-amber-50 p-4 sm:flex-row sm:items-center sm:justify-between sm:p-5">
               <div className="flex items-start gap-3">
-                <span className="text-xl">ⓘ</span>
+                <Info size={20} aria-hidden="true" />
                 <div>
                   <p className="text-sm font-semibold text-amber-900">
                     Sensor readings are not available yet
@@ -252,7 +260,7 @@ export default function WaterQualityPage() {
               <div className="flex flex-col gap-4 rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4 sm:flex-row sm:items-center sm:justify-between">
                 <div className="flex items-center gap-3">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-sky-50 text-xl">
-                    🫧
+                    <Waves size={22} aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-700">
@@ -307,7 +315,7 @@ export default function WaterQualityPage() {
 
                 <div className="relative max-w-sm text-center">
                   <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-white text-2xl shadow-sm">
-                    📈
+                    <TrendingUp size={24} aria-hidden="true" />
                   </div>
                   <h3 className="text-sm font-semibold text-slate-700">
                     No historical readings
@@ -336,7 +344,7 @@ export default function WaterQualityPage() {
               <div className="rounded-xl border border-slate-100 p-4 sm:p-5">
                 <div className="flex items-start gap-3">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 text-xl">
-                    🔎
+                    <Search size={20} aria-hidden="true" />
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-slate-700">

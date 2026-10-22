@@ -1,10 +1,21 @@
 
+import {
+  Clock,
+  Droplets,
+  Fish,
+  Info,
+  LayoutDashboard,
+  Settings,
+  TriangleAlert,
+  Waves,
+} from "lucide-react";
+
 const navigation = [
-  { icon: "▦", label: "Dashboard", href: "/", active: false },
-  { icon: "≋", label: "Water Monitoring", href: "/water", active: false },
-  { icon: "🐟", label: "Fish Monitoring", href: "/fish", active: false },
-  { icon: "⚠", label: "Alerts & Treatment", href: "/treatment", active: true },
-  { icon: "◷", label: "Feeding & Controls", href: "/feeding", active: false },
+  { icon: LayoutDashboard, label: "Dashboard", href: "/", active: false },
+  { icon: Waves, label: "Water Monitoring", href: "/water", active: false },
+  { icon: Fish, label: "Fish Monitoring", href: "/fish", active: false },
+  { icon: TriangleAlert, label: "Alerts & Treatment", href: "/treatment", active: true },
+  { icon: Clock, label: "Feeding & Controls", href: "/feeding", active: false },
 ];
 
 function Sidebar() {
@@ -13,7 +24,7 @@ function Sidebar() {
       <div className="border-b border-white/10 px-5 py-7">
         <a href="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-teal-400/15 text-2xl">
-            🐟
+            <Fish size={22} aria-hidden="true" />
           </div>
           <div>
             <h1 className="text-sm font-bold tracking-wide">SMART AQUA</h1>
@@ -40,7 +51,7 @@ function Sidebar() {
               }`}
             >
               <span className="flex w-6 items-center justify-center text-lg">
-                {item.icon}
+                <item.icon size={18} aria-hidden="true" />
               </span>
               {item.label}
             </a>
@@ -107,11 +118,13 @@ function StepCard({ number, title, description }) {
 }
 
 function AlertRow({ title, description, status }) {
+  const Icon = status === "Water" ? Droplets : Fish;
+
   return (
     <div className="flex flex-col gap-3 border-b border-slate-100 py-4 last:border-0 sm:flex-row sm:items-start sm:justify-between">
       <div className="flex items-start gap-3">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-slate-100 text-lg">
-          {status === "Water" ? "💧" : "🐟"}
+          <Icon size={20} aria-hidden="true" />
         </div>
         <div>
           <p className="text-sm font-semibold text-slate-700">{title}</p>
@@ -136,7 +149,7 @@ export default function TreatmentPage() {
           <header className="flex min-h-[76px] items-center justify-between gap-4 border-b border-slate-200 bg-white px-5 sm:px-8">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-xl md:hidden">
-                ⚠️
+                <TriangleAlert size={20} aria-hidden="true" />
               </div>
               <div>
                 <p className="text-sm font-bold text-slate-800">
@@ -176,7 +189,7 @@ export default function TreatmentPage() {
             <div className="mb-8 rounded-2xl border border-amber-200 bg-amber-50 p-5">
               <div className="flex items-start gap-3">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-white text-xl">
-                  ℹ️
+                  <Info size={20} aria-hidden="true" />
                 </div>
                 <div>
                   <h2 className="text-sm font-bold text-amber-900">
@@ -309,7 +322,7 @@ export default function TreatmentPage() {
                 <div className="rounded-xl border border-slate-100 p-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-50 text-xl">
-                      💧
+                      <Droplets size={20} aria-hidden="true" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-700">
@@ -328,7 +341,7 @@ export default function TreatmentPage() {
                 <div className="rounded-xl border border-slate-100 p-4">
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-teal-50 text-xl">
-                      ⚙️
+                      <Settings size={20} aria-hidden="true" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-slate-700">
